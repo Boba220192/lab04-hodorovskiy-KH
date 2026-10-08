@@ -1,0 +1,35 @@
+
+C:\Users\Acer\Desktop\lab04_HodorovskiyDmytro_KH\src\app.js
+    4:7   error    'oldRate' is assigned a value but never used                                                           no-unused-vars
+   31:9   error    Duplicate key 'city'                                                                                   no-dupe-keys
+   58:29  warning  Unexpected block statement surrounding arrow body; move the returned value immediately after the `=>`  arrow-body-style
+   59:29  warning  Unexpected block statement surrounding arrow body; move the returned value immediately after the `=>`  arrow-body-style
+   76:3   error    Duplicate case label                                                                                   no-duplicate-case
+   94:6   error    Identifier 'total_hours' is not in camel case                                                          camelcase
+   96:2   error    Identifier 'total_hours' is not in camel case                                                          camelcase
+   98:9   error    Identifier 'total_hours' is not in camel case                                                          camelcase
+  102:9   error    Unexpected string concatenation                                                                        prefer-template
+  106:10  error    Unexpected string concatenation                                                                        prefer-template
+  112:15  error    Expected '===' and instead saw '=='                                                                    eqeqeq
+  117:49  error    Expected '===' and instead saw '=='                                                                    eqeqeq
+  118:54  error    Expected '===' and instead saw '=='                                                                    eqeqeq
+  125:13  warning  Blocks are nested too deeply (4). Maximum allowed is 3                                                 max-depth
+  135:2   warning  Unexpected negated condition                                                                           no-negated-condition
+  142:39  warning  Unexpected negated condition                                                                           no-negated-condition
+  147:6   error    Redundant double negation                                                                              no-extra-boolean-cast
+  159:28  warning  Unexpected block statement surrounding arrow body; move the returned value immediately after the `=>`  arrow-body-style
+  168:10  error    'unusedHelper' is defined but never used                                                               no-unused-vars
+  169:6   error    Expected a conditional expression and instead saw an assignment                                        no-cond-assign
+  169:6   error    Unexpected constant condition                                                                          no-constant-condition
+  170:17  error    'totl' is not defined                                                                                  no-undef
+  172:6   error    Use the isNaN function to compare with NaN                                                             use-isnan
+  172:21  error    Empty block statement                                                                                  no-empty
+  173:10  error    'value' is assigned to itself                                                                          no-self-assign
+  175:2   error    Unreachable code                                                                                       no-unreachable
+  189:13  error    Unexpected string concatenation                                                                        prefer-template
+  197:7   error    Identifier 'repair_total' is not in camel case                                                         camelcase
+  198:33  error    Identifier 'repair_total' is not in camel case                                                         camelcase
+  203:41  error    Unexpected string concatenation                                                                        prefer-template
+
+✖ 30 problems (24 errors, 6 warnings)
+  7 errors and 3 warnings potentially fixable with the `--fix` option.
