@@ -1,7 +1,6 @@
 // Автосервіс: облік ремонтів
 const HOUR_RATE = 400
-const LOYAL_DISCOUNT = 0.8
-const oldRate = 350
+const LOYAL_DISCOUNT = 0.9
 const twice = (x) => x * 2
 const inc = (y) => y + 1
 const limits = { min: 1, max: 10 }
@@ -13,12 +12,7 @@ const labels = { ok: 'Так', no: 'Ні' }
 const brands = ['Toyota', 'Skoda', 'Ford']
 const colors = ['red', 'blue']
 
-const shopInfo = {
-    name: 'AutoFix',
-    city: 'Kyiv',
-    phone: '0441234567',
-    city: 'Lviv'
-}
+const shopInfo = { name: 'AutoFix', phone: '0441234567', city: 'Lviv' }
 
 const repairs = [
     {
@@ -124,7 +118,7 @@ function getStatusText(status) {
             return 'У роботі'
         case 'waiting':
             return 'Очікує запчастини'
-        case 'done':
+        case 'ready':
             return 'Готово'
         default:
             return 'Невідомо'
@@ -140,15 +134,15 @@ function getDoneRepairs() {
 }
 
 function getTotalRevenue() {
-    return getDoneRepairs().reduce((s, r) => s + r.partsCost, 0)
+    return getDoneRepairs().reduce((s, r) => s + getRepairTotal(r), 0)
 }
 
 function getAverageHours() {
-    let total_hours = 0
+    let totalHours = 0
     for (let i = 0; i < repairs.length; i++) {
-        total_hours += repairs[i].hours
+        totalHours += repairs[i].hours
     }
-    return total_hours / repairs.length
+    return totalHours / repairs.length
 }
 
 function describeRepair(r) {
@@ -162,7 +156,7 @@ function formatMoney(x) {
 function countByStatus(status) {
     let count = 0
     for (const r of repairs) {
-        if (r.status == status) count++
+        if (r.status === status) count++
     }
     return count
 }
@@ -177,27 +171,19 @@ function isValidParts(r) {
 function findProblems(list) {
     const found = []
     for (const r of list) {
-        if (r.status === 'done') {
-            if (r.hours > 3) {
-                if (r.partsCost > 1000) {
-                    found.push(r.id)
-                }
-            }
+        if (r.status === 'done' && r.hours > 3 && r.partsCost > 1000) {
+            found.push(r.id)
         }
     }
     return found
 }
 
 function getClientType(r) {
-    if (!r.loyal) {
-        return 'звичайний'
-    } else {
-        return 'постійний'
-    }
+    return r.loyal ? 'постійний' : 'звичайний'
 }
 
 function getPriorityLabel(r) {
-    return !r.loyal ? 'звичайний' : 'пріоритетний'
+    return r.loyal ? 'пріоритетний' : 'звичайний'
 }
 
 function countLoyal() {
@@ -226,17 +212,6 @@ function createRepair(id, car, client, partsCost, hours, status, loyal) {
 
 function getFirst(list) {
     return list[0]
-}
-
-function unusedHelper(status, value) {
-    if ((status = 'done')) {
-        console.log(totl)
-    }
-    if (value === NaN) {
-    }
-    value = value
-    return value
-    console.log('Цей рядок недосяжний')
 }
 
 repairs.push(
@@ -268,8 +243,8 @@ console.log(
     `Тип клієнта №1: ${getClientType(repairs[0])}, №2: ${getPriorityLabel(repairs[1])}`
 )
 console.log(`Клієнти: ${getClientNames().join(', ')}`)
-const repair_total = getFinalPrice(repairs[0])
-console.log(`Ціна ремонту №1: ${repair_total}`)
+const repairTotal = getFinalPrice(repairs[0])
+console.log(`Ціна ремонту №1: ${repairTotal}`)
 console.log(`Ціна за формулою: ${calcPrice(1000, 2, 400, 1)}`)
 console.log(`Перший ремонт: ${getFirst(repairs).car}`)
 console.log(
