@@ -103,12 +103,8 @@ function getPartsTotal() {
     return sum
 }
 
-const getLaborCost = (r) => {
-    return r.hours * HOUR_RATE
-}
-const getRepairTotal = (r) => {
-    return r.partsCost + getLaborCost(r)
-}
+const getLaborCost = (r) => r.hours * HOUR_RATE
+const getRepairTotal = (r) => r.partsCost + getLaborCost(r)
 
 function calcPrice(parts, hours, rate, discount) {
     const base = parts + hours * rate
@@ -156,11 +152,11 @@ function getAverageHours() {
 }
 
 function describeRepair(r) {
-    return 'Ремонт #' + r.id + ': ' + r.car + ' (' + r.client + ')'
+    return `Ремонт #${r.id}: ${r.car} (${r.client})`
 }
 
 function formatMoney(x) {
-    return x.toFixed(2) + ' грн'
+    return `${x.toFixed(2)} грн`
 }
 
 function countByStatus(status) {
@@ -172,10 +168,10 @@ function countByStatus(status) {
 }
 
 function isValidHours(r) {
-    return typeof r.hours == 'number' && r.hours > 0
+    return typeof r.hours === 'number' && r.hours > 0
 }
 function isValidParts(r) {
-    return typeof r.partsCost == 'number' && r.partsCost >= 0
+    return typeof r.partsCost === 'number' && r.partsCost >= 0
 }
 
 function findProblems(list) {
@@ -207,7 +203,7 @@ function getPriorityLabel(r) {
 function countLoyal() {
     let n = 0
     for (const r of repairs) {
-        if (!!r.loyal) n++
+        if (r.loyal) n++
     }
     return n
 }
@@ -221,9 +217,7 @@ function needsAttention(r) {
 }
 
 function getClientNames() {
-    return repairs.map((r) => {
-        return r.client
-    })
+    return repairs.map((r) => r.client)
 }
 
 function createRepair(id, car, client, partsCost, hours, status, loyal) {
@@ -264,7 +258,7 @@ console.log(`Ремонтів: ${repairs.length}`)
 console.log(`Сума запчастин: ${getPartsTotal()}`)
 console.log(`Середня тривалість: ${getAverageHours().toFixed(2)} год`)
 console.log(`Виручка (завершені): ${formatMoney(getTotalRevenue())}`)
-console.log('Завершених: ' + countByStatus('done'))
+console.log(`Завершених: ${countByStatus('done')}`)
 console.log(describeRepair(findRepairById(3)))
 console.log(`Статус №3: ${getStatusText(findRepairById(3).status)}`)
 console.log(`Постійних клієнтів: ${countLoyal()}`)
@@ -284,7 +278,7 @@ console.log(
 
 const wd = 8
 const we = 6
-console.log('Робочих годин: ' + (wd + we))
+console.log(`Робочих годин: ${wd + we}`)
 const half = getPartsTotal() / 2
 console.log(`Половина вартості запчастин: ${half}`)
 console.log(`Функції: ${twice(4)} і ${inc(4)}`)
